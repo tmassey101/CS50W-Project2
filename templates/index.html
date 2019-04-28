@@ -3,8 +3,32 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../static/style.css">
-    <script src="../static/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /*
+            document.querySelector('#nameform').onsubmit = () => {
+
+                // Grab new username
+                const username = document.querySelector('#username').value;
+
+                // Say something
+                alert("Hello "+ username);
+
+                // Do something
+                document.querySelector('#login').innerHTML = 'Username = '+ username;
+
+                // Stop form from submitting
+                return false;
+            };
+            */
+
+        });
+    
+    </script>
+
     <title>My first chatroom app</title>
+
 </head>
 
 <body>
@@ -22,14 +46,32 @@
             <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
+                <!---<li><a href="#">About</a></li>
                 <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">Contact</a></li>--->
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+            
+            <ul class="nav navbar-nav navbar-right" id="login">
+
+            {% if not session.logged_in %}
+
+                <form action ="/login" method=post id="nameform">
+                    <input id="username" autofocus placeholder="Enter your name" name="username" type="text">
+                    <input type="submit">
+                </form>
+
+            {% else %}
+
+                <h3 id=username style="color:white">Logged in as: {{curUser}} </h3>
+                <a href="/logout" >log out</a>
+            
+            {% endif %}
+            
             </ul>
-            </div>
+
+
+
         </div>
     </nav>
   
